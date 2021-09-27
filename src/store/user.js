@@ -20,7 +20,7 @@ export const signIn = createAsyncThunk('user/signUp', async ({credentials}) =>{
     return response.data.user
 })
 
-const userSlice = createSlice({
+const userReducer = createSlice({
     name: 'user',
     initialState: {
         user: null,
@@ -55,6 +55,6 @@ const userSlice = createSlice({
     }
 })
 
-export const { logOut } = userSlice.actions
+export const { logOut } = userReducer.actions
 
-export default userSlice.reducer
+export default userReducer.reducer

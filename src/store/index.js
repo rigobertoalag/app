@@ -2,10 +2,12 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import userSlice from './user'
+import userReducer from './user'
+import videosReducer from './videos'
 
 const reducer = combineReducers({
-    user: userSlice
+    user: userReducer,
+    videos: videosReducer
 })
 
 const persistConfig = {
