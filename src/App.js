@@ -11,6 +11,12 @@ import { PersistGate } from 'redux-persist/integration/react'
 import Videos from './videos/Videos.jsx'
 import VideosForm from './videos/VideosForm'
 import VideoShow from './videos/VideoShow'
+import Profile from './users/Profile'
+import HomePage from './Home'
+import { ThemeProvider } from 'styled-components'
+import theme from './theme'
+import Layout from './components/Layout'
+import UserFormLayout from './users/UserFormLayout'
 
 const NotImplemented = () => {
   return (
@@ -57,25 +63,29 @@ function App() {
     <BrowserRouter>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Routes>
-            <Route path="/" element={<NotImplemented />} />
+          <ThemeProvider theme={theme}>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
 
-            <Route path="/usuarios" element={<UsuariosOutlet />}>
-              <Route path="registro" element={<NotImplemented />} />
-              <Route path="login" element={<SignIn />} />
-              <Route path=":id" element={<NotImplemented />} />
-              <Route path=":id/videos" element={<NotImplemented />} />
-            </Route>
+                <Route path="/usuarios" element={<UsuariosOutlet />}>
+                  <Route path="registro" element={<UserFormLayout />} />
+                  <Route path="login" element={<SignIn />} />
+                  <Route path="miperfil" element={<Profile />} />
+                  <Route path=":id/videos" element={<NotImplemented />} />
+                </Route>
 
-            <Route path="/videos">
-              <Route path="/" element={<Videos />} />
-              <Route path="nuevo" element={<VideosForm />} />
-              <Route path=":id" element={<VideoShow />} />
-            </Route>
+                <Route path="/videos">
+                  <Route path="/" element={<Videos />} />
+                  <Route path="nuevo" element={<VideosForm />} />
+                  <Route path=":id" element={<VideoShow />} />
+                </Route>
 
-            <Route path="*" element={<Error404 />} />
+                <Route path="*" element={<Error404 />} />
 
-          </Routes>
+              </Routes>
+            </Layout>
+          </ThemeProvider>
         </PersistGate>
       </Provider>
     </BrowserRouter>

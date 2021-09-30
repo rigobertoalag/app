@@ -3,7 +3,7 @@ import Axios from 'axios'
 
 import apiConfig from '../config/api'
 
-export const loadVideos = createAsyncThunk('videos/load', async (page=1, thunkAPI) => {
+const innerLoadVideos = async(path, thunkAPI)=>{
     let token;
     try {
         token = thunkAPI.getState().user.user.jwtToken;
@@ -13,13 +13,21 @@ export const loadVideos = createAsyncThunk('videos/load', async (page=1, thunkAP
 
     if (!token) return Promise.reject('No hay token');
 
-    const response = await Axios.get(`${apiConfig.domain}/videos?page=${page}`, {
+    const response = await Axios.get(`${apiConfig.domain}/${path}`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
     })
 
     return response.data;
+}
+
+export const loadVideos = createAsyncThunk('videos/load', async (page=1, thunkAPI) => {
+    return innerLoadVideos(`videos?page=${page}`, thunkAPI)
+})
+
+export const loadVideosForUser = createAsyncThunk('videos/user/load', async (args, thunkAPI) => {
+    return innerLoadVideos(`users/videos`, thunkAPI)
 })
 
 export const getVideo = createAsyncThunk('videos/get', async(videoId, thunkAPI)=>{
@@ -87,6 +95,9 @@ const videosSlice = createSlice({
         [getVideo.fulfilled]: (state, action)=>{
             state.status = 'success'
             state.currentVideo = action.payload
+        },
+        [loadVideosForUser.fulfilled]: (state, action) =>{
+            state.data.videos = action.payload
         }
     }
 })

@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadVideos } from "../store/videos";
-import Player from "./Player";
+import { SmallContainer } from "../theme";
+import Video from "./Video";
 
 const Videos = () => {
   const dispatch = useDispatch();
@@ -13,12 +14,11 @@ const Videos = () => {
 
   return (
     <div>
-      {videosState.data.videos.map((video) => (
-        <div key={video.id}>
-          <h2>{video.title}</h2>
-          <Player video={video}></Player>
-        </div>
-      ))}
+      <SmallContainer>
+        {videosState.data.videos.map((video, index) => (
+          <Video key={index} index={index} video={video} />
+        ))}
+      </SmallContainer>
     </div>
   );
 };
