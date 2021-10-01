@@ -10,7 +10,7 @@ const AppInput = (props, ref) => {
   );
 };
 
-const FieldSet = styled.fieldset`
+export const FieldSet = styled.fieldset`
   border: 0;
   max-width: ${({ theme }) => theme.dims.widths.forms};
   display: block;
@@ -18,7 +18,7 @@ const FieldSet = styled.fieldset`
   margin-right: auto;
   text-align: left;
   margin-top: ${({ theme }) => theme.dims.margin.intersection};
-
+  padding: 0;
   & label {
     opacity: 0.6;
   }

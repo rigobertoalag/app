@@ -97,6 +97,7 @@ const videosSlice = createSlice({
             state.currentVideo = action.payload
         },
         [loadVideosForUser.fulfilled]: (state, action) =>{
+            state.status = 'success'
             state.data.videos = action.payload
         }
     }

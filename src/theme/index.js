@@ -50,12 +50,6 @@ export default {
     }
 }
 
-// export const GlobalStyle = createGlobalStyle`
-//   body{
-//       box-sizing: border-box;
-//       }
-// 
-
 export const LayoutContainer = styled.div`
     display: grid;
     min-height: 100vh;
@@ -122,6 +116,8 @@ border-radius: ${({ theme }) => theme.dims.borderRadius.normal};
 padding: ${({ theme }) => theme.dims.padding.largePadding};
 box-shadow: ${({ theme }) => theme.shadows.depth1};
 color: ${({ theme }) => theme.colors.white};
+margin-top: ${({theme}) => theme.dims.margin.normal};
+font-size: 1em;
 width: ${({ fullWidth, small, theme }) => {
         if (fullWidth) return '100%';
         if (small) return theme.dims.widths.forms

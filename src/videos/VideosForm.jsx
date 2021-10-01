@@ -2,6 +2,17 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { createVideo } from "../store/videos";
+import {
+  AppButton,
+  CenteredContainer,
+  SmallContainer as SmallContainerTemplate,
+} from "../theme";
+import AppInput, { FieldSet } from "../components/AppInput";
+import styled from "styled-components";
+
+const SmallContainer = styled(SmallContainerTemplate)`
+  text-align: center;
+`;
 
 const VideosForm = () => {
   const { register, handleSubmit } = useForm();
@@ -17,21 +28,29 @@ const VideosForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="text"
-        name="title"
-        {...register("title", { required: true })}
-        placeholder="Titulo del video"
-      />
-      <input
-        type="file"
-        name="video"
-        {...register("video", { required: true })}
-      />
+    <CenteredContainer>
+      <SmallContainer>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <AppInput
+            type="text"
+            name="title"
+            label="Titulo"
+            {...register("title", { required: true })}
+          />
 
-      <input type="submit" value="Enviar" />
-    </form>
+          <FieldSet>
+            <label>Archivo del video</label>
+            <input
+              type="file"
+              name="video"
+              {...register("video", { required: true })}
+            />
+          </FieldSet>
+
+          <AppButton type="submit" small>Subir</AppButton>
+        </form>
+      </SmallContainer>
+    </CenteredContainer>
   );
 };
 

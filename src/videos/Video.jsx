@@ -4,6 +4,23 @@ import styled from "styled-components";
 import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
 
+const Video = ({ index, video }) => {
+  return (
+    <VideoContainer key={index}>
+      <div className="info">
+        <aside className="sidebar">
+          <LikeButton video={video}/>
+          <ShareButton />
+        </aside>
+        <div className="user-info">
+          <h2>{video.title}</h2>
+        </div>
+      </div>
+      <Player video={video}></Player>
+    </VideoContainer>
+  );
+};
+
 const VideoContainer = styled.div`
   position: relative;
   padding-bottom: 177%;
@@ -42,22 +59,5 @@ const VideoContainer = styled.div`
     }
   }
 `;
-
-const Video = ({ index, video }) => {
-  return (
-    <VideoContainer key={index}>
-      <div className="info">
-        <aside className="sidebar">
-          <LikeButton video={video}/>
-          <ShareButton />
-        </aside>
-        <div className="user-info">
-          <h2>{video.title}</h2>
-        </div>
-      </div>
-      <Player video={video}></Player>
-    </VideoContainer>
-  );
-};
 
 export default Video;
