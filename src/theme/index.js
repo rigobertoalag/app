@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import createGlobalStyle from 'styled-components'
 import { ReactSVG } from 'react-svg'
 
 export default {
@@ -48,6 +49,12 @@ export default {
         depth3: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
     }
 }
+
+// export const GlobalStyle = createGlobalStyle`
+//   body{
+//       box-sizing: border-box;
+//       }
+// 
 
 export const LayoutContainer = styled.div`
     display: grid;
@@ -107,4 +114,23 @@ margin-block-start: 0;
 margin-block-end: 0;
 margin-left: ${({ theme }) => theme.dims.margin.intersection};
 vertical-align: middle;
+`
+
+export const AppButton = styled.button`
+background-color: ${({ theme }) => theme.colors.accent};
+border-radius: ${({ theme }) => theme.dims.borderRadius.normal};
+padding: ${({ theme }) => theme.dims.padding.largePadding};
+box-shadow: ${({ theme }) => theme.shadows.depth1};
+color: ${({ theme }) => theme.colors.white};
+width: ${({ fullWidth, small, theme }) => {
+        if (fullWidth) return '100%';
+        if (small) return theme.dims.widths.forms
+        return 'auto'
+    }};
+cursor: pointer;
+border: none;
+&:hover{
+    opacity: 0.0;
+    box-shadow: ${({ theme }) => theme.shadows.depth2}
+}
 `

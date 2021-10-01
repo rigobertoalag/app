@@ -14,7 +14,7 @@ import VideoShow from './videos/VideoShow'
 import Profile from './users/Profile'
 import HomePage from './Home'
 import { ThemeProvider } from 'styled-components'
-import theme from './theme'
+import theme, { GlobalStyle  } from './theme'
 import Layout from './components/Layout'
 import UserFormLayout from './users/UserFormLayout'
 
@@ -64,6 +64,7 @@ function App() {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider theme={theme}>
+            {/* <GlobalStyle /> */}
             <Layout>
               <Routes>
                 <Route path="/" element={<HomePage />} />
