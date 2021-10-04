@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getVideo } from "../store/videos";
 import { SmallContainer } from "../theme";
-import Player from "./Player";
 import Video from "./Video";
 
 const VideoShow = () => {

@@ -39,7 +39,7 @@ const AppRoutes = () => {
   const user = useSelector((state) => state.user.user);
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<Navigate to ='/videos' />} />
 
       <Route
         path="/usuarios"

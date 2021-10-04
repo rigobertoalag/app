@@ -3,20 +3,23 @@ import Player from "./Player";
 import styled from "styled-components";
 import LikeButton from "./LikeButton";
 import ShareButton from "./ShareButton";
+import devices from "../theme/breakpoints";
 
-const Video = ({ index, video }) => {
+const Video = ({ video, style }) => {
   return (
-    <VideoContainer key={index}>
+    <VideoContainer style={style}>
       <div className="info">
         <aside className="sidebar">
-          <LikeButton video={video}/>
+          <LikeButton video={video} />
           <ShareButton />
         </aside>
         <div className="user-info">
           <h2>{video.title}</h2>
         </div>
       </div>
-      <Player video={video}></Player>
+      <div className="player-container">
+        <Player video={video}></Player>
+      </div>
     </VideoContainer>
   );
 };
@@ -56,6 +59,27 @@ const VideoContainer = styled.div`
     & .user-info {
       grid-area: info;
       align-self: middle;
+    }
+  }
+  @media ${devices.madiumLaptop} {
+    background-color: transparent;
+    display: flex;
+    padding-bottom: 0;
+    & .player-container{
+      flex:1;
+      padding-bottom: 177%;
+      position: relative;
+      order: 0;
+    }
+    & .info{
+      position: relative;
+      width: ${({theme}) => theme.dims.widths.smallControl};
+      order: 1;
+      grid-template-areas: 'sidebar sidebar'
+                            'info info';
+    }
+    & .sidebar{
+      display: flex
     }
   }
 `;

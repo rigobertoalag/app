@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadVideosForUser } from "../store/videos";
-import Player from "../videos/Player";
 import { AppButton as AppButtonTemplate, SmallContainer } from "../theme/index";
 import styled from "styled-components";
 import VideoThumbnail from "../videos/Thumbnail";
@@ -43,7 +42,6 @@ const Profile = () => {
         </Counter>
         <AppButton className="button">Editar</AppButton>
         <LogOutButton>Cerrar Sesion</LogOutButton>
-        <AppButton className="button">Cerrar sesion</AppButton>
       </ProfileHeader>
       <VideosContainer>
         {videos &&

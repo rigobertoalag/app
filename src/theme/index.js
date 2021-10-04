@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import createGlobalStyle from 'styled-components'
 import { ReactSVG } from 'react-svg'
 
 export default {
@@ -15,7 +14,9 @@ export default {
     dims: {
         widths: {
             small: '30em',
-            forms: '17.5em'
+            medium: '40em',
+            forms: '17.5em',
+            smallControl: '10em'
         },
         padding: {
             largePadding: '0.8em 1.2em',

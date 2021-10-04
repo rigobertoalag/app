@@ -3,7 +3,7 @@ import Axios from 'axios'
 
 import apiConfig from '../config/api'
 
-const innerLoadVideos = async(path, thunkAPI)=>{
+const innerLoadVideos = async (path, thunkAPI) => {
     let token;
     try {
         token = thunkAPI.getState().user.user.jwtToken;
@@ -22,25 +22,46 @@ const innerLoadVideos = async(path, thunkAPI)=>{
     return response.data;
 }
 
-export const loadVideos = createAsyncThunk('videos/load', async (page=1, thunkAPI) => {
-    return innerLoadVideos(`videos?page=${page}`, thunkAPI)
+export const loadVideos = createAsyncThunk('videos/load', async (args, thunkAPI) => {
+    let token, page;
+    try {
+        token = thunkAPI.getState().user.user.jwtToken
+    } catch {
+        return Promise.reject('No hay token')
+    }
+
+    if (!token) return Promise.reject('No hay token')
+
+    try {
+        page = thunkAPI.getState().videos.data.nextPage
+    } catch {
+        page = 1
+    }
+
+    const response = await Axios.get(`${apiConfig.domain}/videos?page=${page}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return response.data
+    // return innerLoadVideos(`videos?page=${page}`, thunkAPI)
 })
 
 export const loadVideosForUser = createAsyncThunk('videos/user/load', async (args, thunkAPI) => {
     return innerLoadVideos(`users/videos`, thunkAPI)
 })
 
-export const getVideo = createAsyncThunk('videos/get', async(videoId, thunkAPI)=>{
+export const getVideo = createAsyncThunk('videos/get', async (videoId, thunkAPI) => {
     let token
-    try{
-        token =thunkAPI.getState().user.user.jwtToken
-    }catch{
+    try {
+        token = thunkAPI.getState().user.user.jwtToken
+    } catch {
         return Promise.reject('No hay token')
     }
 
-    if(!token) return Promise.reject('No hay token')
+    if (!token) return Promise.reject('No hay token')
 
-    const response = await Axios.get(`${apiConfig.domain}/videos/${videoId}`,{
+    const response = await Axios.get(`${apiConfig.domain}/videos/${videoId}`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -92,11 +113,11 @@ const videosSlice = createSlice({
                 videos: state.data.videos.concat(action.payload.videos)
             }
         },
-        [getVideo.fulfilled]: (state, action)=>{
+        [getVideo.fulfilled]: (state, action) => {
             state.status = 'success'
             state.currentVideo = action.payload
         },
-        [loadVideosForUser.fulfilled]: (state, action) =>{
+        [loadVideosForUser.fulfilled]: (state, action) => {
             state.status = 'success'
             state.data.videos = action.payload
         }

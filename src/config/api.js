@@ -1,5 +1,5 @@
 const apiConfig =  {
-    domain: 'http://localhost:3000'
+    domain: process.env.REACT_APP_ENDPOINT
 }
 
 export default apiConfig
